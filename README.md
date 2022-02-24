@@ -43,7 +43,7 @@ Le projet est un blog classique, avec les spécificités suivantes :
 
 ## Les 3 challengers : 
 
-### [1. Adrien](le lien de ton github)
+### [1. Adrien](https://github.com/adriensleem)
 Connais Django, sera positionné sur Ruby On Rails
 
 ### [2. Shérif](le lien de ton github)
