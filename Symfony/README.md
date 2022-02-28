@@ -52,6 +52,70 @@ Finalement, la commande de création de base de donnée fonctionne enfin, je peu
 
 </div>
 
-## 2. Setup mes premières "Entités"
-#### _parce que chez symfony un Model c'est une Entity_
+Mon oeil n'as pas pu s'empêcher d'être attiré par la barre dite de _débogage_ situé en bas de la page. Sur cette barre on
+y retrouve pas mal d'informations intéressantes : le code http, le temps d'exécution du serveur, la mémoire utilisé et d'autres
+éléments qui échappent encore à mon domaine. Je tiens à souligner que je trouve ça assez impressionnant d'avoir autant d'outil.
+Sur Rails, il n'y a pas de solution simple pour identifier les `memory leaks` ou encore identifier les `requêtes N+1`. Même si je pense que cela
+n'omet pas d'utiliser une solution APM telle que Scout, c'est déjà un bon premier pied à l'étrier pour motiver le développeur
+à optimiser son application ! 🏇
 
+## 2. Setup mes premières "Entités"
+#### _Parce que chez symfony un Model c'est une Entity_
+
+D'après la documentation, pour créer et manipuler les entités il faut utiliser la commande `php bin/console make:entity`
+
+Je lance la commande et juste Woaw ✨
+
+<div style="width:50%; margin: auto;">
+
+![](screenshots/entity_maker.png)
+
+</div>
+
+__C'est tellement cool à utiliser !__
+
+On peut rapidement créer son entité et la faire évoluer juste en répondant à des questions. Je trouve 
+cela sincèrement incroyable en terme d'expérience développeur c'est très intuitif et facile à utiliser.
+De plus, pour créer ses relations entre entités c'est également très simplifié
+
+<div style="width:50%; margin: auto;">
+
+![](screenshots/relation_maker.png)
+
+</div>
+
+Je consulte [la documentation](https://symfony.com/doc/current/doctrine.html#creating-an-entity-class)
+afin de bien comprendre toutes les questions mais en réalité tout coule de source pour l'instant.
+
+Je génère donc mes entités `Article`, `User`, `Comment` avec une grande aisance 🛼.
+
+Des fichiers correspondants à chacune de mes entités sont apparues dans le dossier `src/`. Première remarque on peut accéder à tous les attributs
+de notre entité via son fichier. C'est intéressant à souligner car dans Rails tout est séparé dans plusieurs fichiers pour avoir 
+des fichiers très petits. Dans notre cas, tous les attributs ainsi que leurs accesseurs et mutateurs sont disponible dans ce fichier.
+Le bon point est que si l'on veut modifier un comportement ou ajouter un callback sur certaines actions c'est facile. Cependant
+je pense que cela arrive très rarement car dans la majorité des cas on va créer une nouvelle méthode juste pour notre utilisation.
+
+```php
+# /src/Entity/Article.php
+    
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
+
+    #[ORM\Column(type: 'text')]
+    private $content;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $writer;
+
+    #[ORM\Column(type: 'string', length: 100)]
+    private $title;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    private $comments;
+```
+
+
+## 3. Vues, controllers et routing
