@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>{{ article.title }}</h1>
+    <h2>by {{ article.writer.email }}</h2>
+
+    <p>{{ article.content }}</p>
+
+    <hr/>
+
+    <h3>Comments ({{ comments.count }})</h3>
+
+    {% if app.user %}
+        <h6>Ajouter un commentaire:</h6>
+        <div>
+            {{ form_start(comment_form) }}
+            {{ form_widget(comment_form) }}
+            <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(comment_form) }}
+        </div>
+
+    {% endif %}
+
+
+    {% for comment in comments %}
+        <div style="border: 1px solid black">
+            <h3>{{ comment.writer.email }}</h3>
+            <p>{{ comment.content }}</p>
+            {% if comment.writer == app.user %}
+                <form method="post" name="delete-{{ comment.id }}" action="{{ path('comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                    <a href="#" onclick="document.forms['delete-{{ comment.id }}'].submit()">Delete</a>
+                </form>
+            {% endif %}
+        </div>
+
+    {% endfor %}
+
+    <a href="{{ path('article_index') }}">back to list</a>
+
+    {% if app.user == article.writer %}
+        <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+
+{#        {{ include('article/_delete_form.html.twig') }}#}
+    {% endif %}
+{% endblock %}
