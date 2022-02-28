@@ -46,7 +46,7 @@ Le projet est un blog classique, avec les spécificités suivantes :
 ### [1. Adrien](https://github.com/adriensleem)
 Connais Django, sera positionné sur Ruby On Rails
 
-### [2. Shérif](le lien de ton github)
+### [2. Shérif](https://github.com/Sherif-IT)
 Connais Sympfony, sera positionné sur Django
 
 
