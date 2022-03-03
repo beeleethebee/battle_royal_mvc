@@ -98,24 +98,150 @@ je pense que cela arrive très rarement car dans la majorité des cas on va cré
 ```php
 # /src/Entity/Article.php
     
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column(type: 'integer')]
+private $id;
 
-    #[ORM\Column(type: 'text')]
-    private $content;
+#[ORM\Column(type: 'text')]
+private $content;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $writer;
+#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
+#[ORM\JoinColumn(nullable: false)]
+private $writer;
 
-    #[ORM\Column(type: 'string', length: 100)]
-    private $title;
+#[ORM\Column(type: 'string', length: 100)]
+private $title;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
-    private $comments;
+#[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+private $comments;
 ```
 
 
 ## 3. Vues, controllers et routing
+
+Habitué du rails, je cherche une commande qui fais tout le travail à ma place. Je tombe assez rapidement sur `php bin/console make:controller [EntityName]`.
+C'est parfait cela me génère le CRUD pour mon Entité exactement comme un `rails g scaffold` ferais.
+
+<div style="display: flex; width: 100%; justify-content: space-evenly;">
+
+<div style="width: 40%">
+
+L'architecture de génération est super... originale 🤯. Pour les controllers et les entities sela me semble normal d'être regroupé ensemble. Cependant je ne comprends pas tellement
+l'apport du dossier `Form` et `Repository`. De ce que je comprends, on doit pouvoir générer nos formulaires directement depuis une classe PHP. Je trouve cela vraiment très limitant car
+pour suivre la doctrine de symfony cela nous impose d'avoir nos formulaires toujours pareils. Je pense qu'avec de petites entité cela ne pose pas de problème, mais lorsque l'on commence à avoir
+des formulaires imbriqués des dépendances de ressources cela ne doit vraiment pas être pratique du tout. Les `Repository` sont comme le guide d'utilisation propre à une entité. C'est-à-dire que si
+je veux fetch de la donné je dois obligatoirement passer par cette class pour interagir avec ma base de donnée. Je pense que c'est quelque chose d'intéressant d'avoir décorrélé les méthodes propres à une
+entité, qui sont utilisé pour la manipuler, des méthodes pour rechercher la donnée. Cela rajoute une couche de complexité, certes, mais au moins le code est mieux découpé.
+</div>
+
+<div style="width: 20%">
+
+![](screenshots/architecture.png)
+</div>
+
+
+</div>
+
+
+
+Passons à la structure même des controllers :
+```php
+# /src/Controller/ArticleController.php
+
+#[Route('/article/new', name: 'article_new', methods: ['GET', 'POST'])]
+public function new(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $this->denyAccessUnlessGranted('ROLE_USER');
+    $article = new Article();
+    $user = $this->getUser();
+    $article->setWriter($user);
+    $form = $this->createForm(ArticleType::class, $article);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    return $this->renderForm('article/new.html.twig', [
+        'article' => $article,
+        'form' => $form,
+    ]);
+}
+```
+
+Premièrement, voyons le routing. Symfony dispose de 5 manières de déclarer ses routes, c'est beaucoup trop ! 
+On peut choisir d'utiliser :
+- Les Annotations dans le controller 😌
+- Les Attributs dans le controller 😊
+- Un fichier YAML 😕
+- Un fichier XML 😬
+- Un fichier PHP 💀
+
+Pour simplifier au maximum la syntaxe je décide d'utiliser les attributs car c'est ce qui demande le moins de ligne et de caractères.
+Son fonctionnement est très simple. J'indique le path auquel je veux rattacher ma méthode, je lui donne un nom générique afin de la retrouver indépendamment du path puis je renseigne les méthodes HTTP autorisé. C'est très simple et ça fonctionne on ne peut pas en attendre davantage.
+
+Ensuite viens la définition de la méthode de controller elle-même. Le premier élément qui me chagrine vraiment c'est le fait de devoir passer des paramètres à ma méthode. C'est vraiment juste de la magie noire. Pour pouvoir lire les paramètres de ma requêtes ou pour pouvoir persister
+mon entité je dois passer un paramètre dans ma fonction qui instancie les objects qui me permettent de le faire. C'est si compliqué et inutile pour rien.
+
+Enfin, j'arrive à écrire ce que je souhaite faire sans gêner le code auto-généré : refuser l'accès à l'utilisateur non connecté et mettre par défaut le créateur de l'article en cours comme étant l'utilisateur connecté. Le code est assez lisible
+dans son ensemble. Je trouve cela quand même redondant de devoir passer par un `EntityManager` pour persister mon entité plutôt que de faire par exemple `$article->save()`. Je trouve cette syntaxe inutile et j'ai vraiment l'impression d'être passé à côté de quelque chose de plus simple.
+
+Pour finir, les vues. Symfony utilise Twig pour faire ses templates. Sa syntaxe est vraiment très simple, ce n'est pas du PHP donc forcément... 😇
+
+```html
+{% for article in articles %}
+    <tr>
+        <td>{{ article.title }}</td>
+        <td>{{ article.writer.email }}</td>
+        <td>
+            <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
+            {% if article.writer == app.user %}
+                <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                {{ include('article/_delete_form.html.twig') }}
+            {% endif %}
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="3">no records found</td>
+    </tr>
+{% endfor %}
+```
+
+La double accolade `{{` sers à interpoler de la donnée dans la vue quant à `{%` sert aux conditions et aux boucles. Il est tout de même important de lire la [documentations de twig](https://twig.symfony.com/doc/3.x/templates.html) afin de bien l'utiliser.
+
+## 4. Les difficultés
+
+Sincèrement le projet n'a pas été trop compliqué. La partie la plus "dure" c'est de devoir lire des pages de documentations dans son intégralité pour être sûr d'être dans la bonne direction.
+
+Cependant je peux lister quelques tâches qui ont été plus longues que ce que j'aurai aimé :
+1. Mettre une root page. Comme en Rails on doit manuellement définir la homepage je pensais vraiment qu'en Symfony il y aurais quelque chose de similaire. Ma solution -> J'ai retiré la base url de mon `ArticleController` pour forcer l'url `/`
+à être la root url.
+   
+2. J'ai eu un problème de routes qui s'entrecroisent avec le login et les commentaires. La conséquence est que lorsque j'essayais de me connecter le serveur comprenais que je voulais supprimer un commentaire et du coup `500`.
+
+3. J'ai trop longtemps voulu essayer d'utiliser la méthode HTTP `DELETE` pour mes routes de suppression de ressource. Je n'ai pas réussi à le faire fonctionner donc j'ai rapidement céder à la simplicité de laisser la méthode en `POST`.
+
+
+## Conclusion 
+
+Sincèrement, ce fût une expérience agréable. Pas suffisamment pour que je fasse un nouveau projet avec Symfony, mais je ne regrette pas d'avoir fait cette expérience.
+
+### Je note ce framework à 14/20
+
+
+#### Les plus
+- Une documentation incroyable, qui suit vraiment le développeur et qui t'aide à comprendre les bases dont tu as besoins pour faire du MVC
+- Des commandes faciles qui aident beaucoup au développement (mention spéciale à l'entity maker)
+- Pleins de façon de consommer le framework. Même si ce n'est pas le cadre de ce projet, on peut facilement y brancher un framework JS front et s'affranchir de twig
+
+#### Les moins
+- C'est du PHP. Le code PHP n'est pas forcément le plus lisible. Je n'aime toujours pas PHP.
+- Les EntityForm pour moi c'est un gros moins car même si l'idée est bonne on perds énormément en flexibilité dans le développement des formulaires pour faire quelque chose de très custom.
+
+
+J'ai cette sensation d'avoir reçu un cadeau de noël que j'ai envie de revendre à CashConverter après avoir joué pendant 4 heures. C'étais cool le temps que ça a duré mais je ne me projette absolument pas l'utiliser davantage. 
