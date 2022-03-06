@@ -39,7 +39,7 @@ Une installation longue est fastidieuse mais rien d'extraordinaire tous va bien 
 Super le projet run mais rien de génial 
 <div style="width:50%; margin: auto;">
 
-    ![](screen/rubycreated.png)
+![](screen/rubycreated.png)
 
 </div>
 
