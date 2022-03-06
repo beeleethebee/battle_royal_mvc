@@ -1,0 +1,24 @@
+<html>
+  <head>
+        <title>OniMaskClub - Register</title>
+        <%= stylesheet_link_tag "register" %>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Connexion à votre compte OniMask</h1>
+      <hr style="width: 50%; margin: 25px;">
+      <%= form_with url: sign_in_path, class: "form" do |f| %>
+        <div class="input">
+        <%= f.text_field :email, id: 'email', class: "input-text", placeholder: "Email" %>
+        </div>
+        <div class="input">
+        <%= f.password_field :password, id: 'password', class: "input-text", placeholder: "Password" %>
+        </div>
+        <%= f.submit 'Revenir', class: "btn-register" %>
+      <% end %>
+    </div>
+  </body>
+</html>

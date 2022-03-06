@@ -1,0 +1,21 @@
+ <%= stylesheet_link_tag "home" %>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+ </head>
+
+ <div class="container-elem">
+ <h1>Tous les articles</h1>
+ <hr>
+ <% if @articles.length > 0  %>
+   <% @articles.each do |article| %>
+        <div class="category-card">
+            <div class="title-card"><a href="/articles/<%=article.id%>"><%= article.title %></a></div>
+        </div>
+    <% end %>
+<% else %>
+  <h1>Nous n'avons trouver aucun articles</h1>
+<% end %>
+</div>
+ 

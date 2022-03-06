@@ -1,0 +1,39 @@
+
+.notice{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.notice-text{
+    width: 30%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(20,20,20);
+    color: rgb(8, 151, 39);
+
+    font-family: sans-serif;
+    padding: 25px;
+
+}
+
+.alert-text{
+    width: 30%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(20,20,20);
+   
+    font-family: sans-serif;
+    color: rgb(172, 10, 10);
+}

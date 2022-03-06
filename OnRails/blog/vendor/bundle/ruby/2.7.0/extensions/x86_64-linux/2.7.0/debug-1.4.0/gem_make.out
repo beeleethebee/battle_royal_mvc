@@ -1,0 +1,16 @@
+current directory: /home/adrien/Bureau/Ecole/battle_royal_mvc/Ruby onRails/blog/vendor/bundle/ruby/2.7.0/gems/debug-1.4.0/ext/debug
+/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20220225-22151-1uxz8qc.rb extconf.rb
+creating Makefile
+
+current directory: /home/adrien/Bureau/Ecole/battle_royal_mvc/Ruby onRails/blog/vendor/bundle/ruby/2.7.0/gems/debug-1.4.0/ext/debug
+make "DESTDIR=" clean
+
+current directory: /home/adrien/Bureau/Ecole/battle_royal_mvc/Ruby onRails/blog/vendor/bundle/ruby/2.7.0/gems/debug-1.4.0/ext/debug
+make "DESTDIR="
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/adrien/Bureau/Ecole/battle_royal_mvc/Ruby onRails/blog/vendor/bundle/ruby/2.7.0/gems/debug-1.4.0/ext/debug
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20220225-22151-13o992a/debug

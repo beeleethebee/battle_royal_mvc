@@ -1,0 +1,32 @@
+.container-elem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body{
+    display: block;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+.btn-comment{
+    background-color: #c0392b;
+    padding: 15px;
+    margin-top: 50px;
+    color: white;
+    border: none;
+}
+
+.btn-comment:hover{
+    transition: 1s;
+    background-color: white;
+    padding: 15px;
+    margin-top: 50px;
+    color: #c0392b;
+    border: none;
+}
+
+
+

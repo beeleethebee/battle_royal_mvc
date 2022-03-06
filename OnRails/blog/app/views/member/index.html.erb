@@ -1,0 +1,8 @@
+<h1>Tous les membres</h1>
+ <%= stylesheet_link_tag "home" %>
+
+   <% @users.each do |user| %>
+        <div class="category-card">
+            <span> <%= user.email %></span>
+        </div>
+<% end %>
