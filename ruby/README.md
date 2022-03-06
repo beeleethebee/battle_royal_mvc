@@ -316,7 +316,7 @@ Cependant je peux lister quelques tâches qui ont été plus longues que ce que 
 
 Sincèrement, ce fût une expérience agréable. Pas suffisamment pour que je fasse un nouveau projet avec Symfony, mais je ne regrette pas d'avoir fait cette expérience.
 
-### Je note ce framework à 14/20
+### Je note ce framework à 12/20
 
 
 #### Les plus
