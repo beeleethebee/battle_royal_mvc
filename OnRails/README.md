@@ -65,7 +65,7 @@ production:
 Nous avons bien tout configuré, par conséquent, notre base de données fonctionne parfaitement aisni que :
 
 ## 2. Setup mes premières "Models"
-#### _On vas créer nos premier models_
+#### _On vas créer nos premiers models_
 
 Nous pouvons donc commencer à créer notre base de données afin que celle-ci accueille des données sinon ce n'est pas très marrant :D.
 Sur mon jeune framework Ruby Onrails on possède de multiples commandes plus utiles les unes que les autres.
@@ -159,7 +159,7 @@ end
 Voila comment on a créé un models, rien de bien compliqué me diriez-vous. Néanmoins, détrompez-vous toute la dificulté est dans le jointure lorsque que l'on connait pas les histoires de référence. Mais ruby est bien construit, en effet, une fois prise en mains, une jointure devient aussi facile à faire que d'écrire une simple variable 
 `belong_to` -> qui associer un table a une autre et `has_one / has_many` -> qui donne le type de jointure. 
 
-__Généronbs la databse__
+__Générons la database__
 
 On peux à partir de maintenant générer notre base de données, pour ce faire, un nouvelle commande ahah encore une ? Et oui comme je vous ai dit on possède de multiples commandes nous faisaint le travail à notre place.
 
