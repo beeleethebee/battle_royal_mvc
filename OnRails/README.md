@@ -1,27 +1,27 @@
 # Ruby Onrails
 
-Salut à toi chère lecteur ou lectrice de ce petit journal de bord de mon aventure sur Ruby onRails. Etant une personne féru de Python et de PHP, je
-n'avais jamais touché à une technologie comme Ruby. C'était pour moi une agréable et la fois triste suprise que de me dire que j'allais vraiment devoir de partir de zéro comme un survivant que l'on lâche pratiquement nu dans la nature il fallait réapprendre le code et cette nouvelle façon de coder ce qui n'as pas été de tous repos honnêtement.
+Salut à toi cher lecteur ou lectrice de ce petit journal de bord de mon aventure sur Ruby onRails. Etant une personne féru de Python et de PHP, je
+n'avais jamais touché à une technologie comme Ruby. C'était pour moi une agréable et la fois triste suprise que de me dire que j'allais vraiment devoir de partir de zéro comme un survivant qu'on lâche pratiquement nu dans la nature il fallait réapprendre le code et cette nouvelle façon de coder, ce qui n'as pas été de tous repos.
 
-Mais forcement d'apprendre que cette technologie est une technologie plus que particulière a mes yeux et ayant une syntaxe plus que mystique.
-Commençons donc d   ans le periple de mon aventure Ruby onRails.
+Mais forcé d'apprendre que cette technologie est une technologie plus que particulière à mes yeux et ayant une syntaxe plus que mystique.
+Commençons donc dans le périple de mon aventure Ruby onRails.
 
 ## 1. Installation projet et Setup
 
-On avais pour contrainte d'utiliser uniquement la documentation offcielle  [officielle de Ruby OnRails](https://guides.rubyonrails.org/getting_started.html).
+On avait pour contrainte d'utiliser uniquement la documentation offcielle  [officielle de Ruby OnRails](https://guides.rubyonrails.org/getting_started.html).
 
 voyons voir comment on va installer ce fameux Ruby OnRails 
 
 Installons nodeJS comme nous demande la documentation mais pas pour rien celle-ci nous permettera d'utiliser le javascript avec notre projet.
 `sudo apt-get install nodejs`
 
-Installons PostgresSQL, j'aime bien et je l'ai donc utilisé pour mon petit projet de blog.
+Installons PostgresSQL, que j'affectionne et donc utilisé pour mon petit projet de blog.
 `sudo apt-get install postgresql postgresql-contrib`
 
 Configurons notre postgres c'est important :
 `createuser -P -s -e adrien`
 
-Parfait on peut ensuite créer notre base de données et tous ce qui s'en suis  installons le plus important c'est à dire Ruby OnRails :
+Parfait on peut ensuite créer notre base de données et tout ce qui s'en suit, installons le plus important c'est à dire Ruby OnRails :
 `sudo apt-get install rubygems`
 `gem install rails`
 Installons la version de postgres avec gem pour Ruby :
@@ -29,19 +29,19 @@ Installons la version de postgres avec gem pour Ruby :
 On peut enfin créer notre projet parfait non ?
 `rails new blog --database=postgresql`
 
-Une installation longue est fastidieuse mais rien d'extraordinaire tous va bien le projet est bien créer on peux meme le lancer pour tester rien de plus simple que :
+Une installation longue est fastidieuse mais rien d'extraordinaire tout va bien le projet est bien créé on peux même le lancer pour tester, rien de plus simple que :
 `bin/rails server`
 
-Super le projet run mais rien de génial 
+Super le projet run, mais rien de génial 
 <div style="width:50%; margin: auto;">
 
 ![](screen/rubycreated.png)
 
 </div>
 
-Configurons la connexion à la 
+Configurons la connexion à la base de données 
 Pour ce faire rendons nous dans le dossier `/config/database.yml`
-Nous allons modifier c'est quelque ligne : 
+Nous allons modifier ces quelques lignes : 
 
 ```yml
 
@@ -62,16 +62,16 @@ production:
   password: blog-password
 
 ```
-On a tous setup Niquel tous ça notre abse de donné fonctionne ainsi que notre 
+Nous avons bien tout configuré, par conséquent, notre base de données fonctionne parfaitement aisni que :
 
 ## 2. Setup mes premières "Models"
 #### _On vas créer nos premier models_
 
-Commençon a créer notre base de donnée afin que celle-ci accueille des donnée sinon ce n'est pas très marrant :D.
-Sur mon jeune framework Ruby Onrails on possède une tripoter de command plus utilise les une que les autres.
-Comment vous dire que c'est a disposition donc autant l'utiliser ahaha !! 
+Nous pouvons donc commencer à créer notre base de données afin que celle-ci accueille des données sinon ce n'est pas très marrant :D.
+Sur mon jeune framework Ruby Onrails on possède de multiples commandes plus utiles les unes que les autres.
+Comment vous dire que c'est à disposition donc autant l'utiliser ahaha !! 
 Utilisons la commande : `bin/rails generate model ModelName [columnName:type, columnName:type, ...]`
-cette commande que fait elle ? Elle générer des Models ainsi que des migration et un remplis le fichier schema.rb
+cette commande que fait elle ? Elle génère des Models ainsi que des migrations et remplis également le fichier schema.rb
 Générons mes Models :) 
 
 User :
@@ -91,7 +91,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
   end
 end
 ```
-Et notre model ressemble a ceci : 
+Et notre model ressemble à ceci : 
 ```ruby
 class User < ApplicationRecord
     has_many :comments
@@ -156,12 +156,12 @@ class Category < ApplicationRecord
     has_many :articles
 end
 ```
-Voila comment on créer un models rien de bien complexe me dirais vous. Mais détromper vous toute la dificulter est dans le jointure lorsque que l'on connais pas les histoires de reference. Mais ruby est bien construit pour cela une fois prise en mains une jointure deviens ausssi facile à faire que d'écrire une simple variable 
+Voila comment on a créé un models, rien de bien compliqué me diriez-vous. Néanmoins, détrompez-vous toute la dificulté est dans le jointure lorsque que l'on connait pas les histoires de référence. Mais ruby est bien construit, en effet, une fois prise en mains, une jointure devient aussi facile à faire que d'écrire une simple variable 
 `belong_to` -> qui associer un table a une autre et `has_one / has_many` -> qui donne le type de jointure. 
 
 __Généronbs la databse__
 
-On peux à partir de maintenant générer notre base de donner pour ce faire un nouvelle command ahah encore une ? Et oui comme je vous ai dit on possède une tripoter de command qui nous mache tous le travail.
+On peux à partir de maintenant générer notre base de données, pour ce faire, un nouvelle commande ahah encore une ? Et oui comme je vous ai dit on possède de multiples commandes nous faisaint le travail à notre place.
 
 
 
@@ -175,15 +175,15 @@ On peux à partir de maintenant générer notre base de donner pour ce faire un 
 
 ## 3. Vues, controllers et routing
 
-On va maintenant rentrer dans le vif du sujet notre routing nos controllers et nos Views
+On va maintenant rentrer dans le vif du sujet, notre routing, nos controllers et nos Views
 
 <div style="display: flex; width: 100%; justify-content: space-evenly;">
 
 <div style="width: 40%">
 
-Il faut avant tous savoir que j'ai lu et relu la documentation qui expliquer extrêment bien les chose mais que je suis confronter à quelque chose qui me déplais énorment. Quel est cette chose qui me déplais tant ? La syntaxe mais nous en reparlerons plus tard de cela. Nous allons créer nos première routes afin de navbiguer entre les différente pages malheuresement pas de commande pour ce Ruby OnRails qui vas nous mâcher tous le travail.
+Il faut avant tout savoir que j'ai lu et relu la documentation qui expliquait la façon de procéder, néanmoins,je me suis vu confronter à une chose déplaisante . Quelle est cette chose me deplaisant tant ? La syntaxe, mais nous en reparlerons plus tard. Nous allons créer nos premières routes afin de naviguer entre les différentes pages, malheuresement pas de commande nous faisant tout le travail pour ce Ruby OnRails.
 Mais nous allons aller directement de notre dossier /config/routes.rb.
-Les choses serieuse commence nous pouvons définir nos routes nous même avec un methode et un appella a la vue et au controller associé .
+Les choses serieuses commence, en effet, nous pouvons désormais définir nos routes nous même avec un méthode et un appella à la vue et au controller associé .
 
 ```ruby
 root "home#index"
@@ -198,9 +198,9 @@ root "home#index"
   get "/category/:id", to: "category#show"
 ```
 
-Root nos que nous definissons comme première page de notre index en quelques sortes.
+Root nos que nous definissons comme première page de notre index en quelque sorte.
 
-Et ruby nous mache encore une fois le travails avec les resources qui permette de créer les CRUD encore plus rapidement.
+Et ruby nous effectue, une nouvelle fois, le travail avec les resources qui permettent de créer les CRUD encore plus rapidement.
 
 ```ruby
 resources :articles do
@@ -208,7 +208,7 @@ resources :articles do
   end
 ```
 
-on peux bien evidemment imbriquer des resources dans d'autre resources lorsqu'elle sont associé.
+on peut bien évidemment imbriquer des resources dans d'autres resources lorsqu'elles sont associées.
 
 </div>
 
@@ -298,22 +298,28 @@ end
 
 ## 4. Les difficultés
 
-Je ne veux plus toucher au ruby On rails c'est un technologie que ne ma pas plus.
+Je ne veux plus utiliser ce langage de programation. En effet, celui-ci ne m'a pas plu.
 
-1. MSystème de routing très complexe que je ne comprend pas.
+1. MSystème de routing est très complexe que je ne le comprend pas.
    
-2. Model compliquer a,mettre en place meme avec la documentation pour la première fois
+2. Model compliquer à mettre en place même avec la documentation pour la première fois
 
 
 
 ## Conclusion 
 
-Sincèrement, ce fût une expérience agréable. Pas suffisamment pour que je fasse un nouveau projet avec Symfony, mais je ne regrette pas d'avoir fait cette expérience.
+Ce projet a été plus que complexe avec un démarrage difficile. La documentation étant quant à elle plutôt bien fournie, m'a permis de réaliser diverses tâches ainsi que de pouvoir créer mon projet "Blog".
 
 ### Je note ce framework à 12/20
 
 
 #### Points positifs
+- Utilitaire de commandes bien fournis, permettant de réaliser de multiples tâches. Telles que générations de controller, de models, affichage des routes.
+- Très peu de lignes de code par controllers. Ce qui rend le traitement des erreurs plus simple et plus rapide.
+- Documentations très riche en informations et communautées plutôt active. 
 
 
 #### Points Négatifs
+- Routing pas clairement seulement mon point personnel
+- Models reference difficile a prendre en main au début.
+
