@@ -19,10 +19,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_05_235149) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "users_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_articles_on_category_id"
-    t.index ["users_id"], name: "index_articles_on_users_id"
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -33,27 +33,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_05_235149) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
-    t.bigint "articles_id", null: false
-    t.bigint "users_id", null: false
+    t.bigint "article_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["articles_id"], name: "index_comments_on_articles_id"
-    t.index ["users_id"], name: "index_comments_on_users_id"
+    t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
+    t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
-    t.bigint "articles_id"
-    t.index ["articles_id"], name: "index_users_on_articles_id"
   end
 
   add_foreign_key "articles", "categories"
-  add_foreign_key "articles", "users", column: "users_id"
-  add_foreign_key "comments", "articles", column: "articles_id"
-  add_foreign_key "comments", "users", column: "users_id"
-  add_foreign_key "users", "articles", column: "articles_id"
+  add_foreign_key "articles", "users"
+  add_foreign_key "comments", "articles"
+  add_foreign_key "comments", "users"
 end

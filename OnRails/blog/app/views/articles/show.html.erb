@@ -4,23 +4,41 @@
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-    
+
 </head>
 
 <body>
     <div class="container-elem">
         <div class="articles-body">
             <h2><%= @article.title%></h2>
-            <ul>
-             <li><%= link_to "destroy", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li></ul>
+            <% if @article.user_id == Current&.user&.id %>
+              <%= button_to "Delete", @article, method: :delete %>
+            <% end %>
             <div class="body">
                 <%= @article.body%>
             </div>
             <span><%= @user.username%></span><br>
-            <time datetime="">[<%= @article.created_at%>]</time>
+            <p>Publié à <%= @article.created_at.strftime("%Hh %d/%m/%Y")%></p>
         </div>
-
+      <div>
+        <% if Current.user %>
+          <%= form_with url: article_comments_path(@article) do |f|%>
+            <%= f.text_field :body, placeholder: "J'ai trop aimé quand..." %>
+            <%= f.submit 'Submit' %>
+          <% end %>
+        <% end %>
+        <div class="d-flex">
+          <% @article.comments.each do |comment| %>
+            <div class="m-3 p-3 border">
+              <p><%= comment.body %></p>
+              <p>by: <%= comment.user.username %></p>
+              <p>at: <%= comment.created_at.strftime("%Hh%M") %></p>
+              <% if @article.user == Current.user || comment.user == Current.user  %>
+                <%= button_to "Delete", article_comment_path(@article, comment), method: :delete %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 </body>
