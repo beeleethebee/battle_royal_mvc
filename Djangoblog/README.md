@@ -62,7 +62,7 @@ Je crée un premier utilisateur avec rôle admin, L&#39;outil en ligne de comman
 ```sh
 $ python3 manage.py createsuperuser --username=admin [--email=admin@admin.com](mailto:--email%3Dsherif@admin.com)
 ```
-<div style="width: 50%">
+<div style="width: 100%">
 
 ![auth](assets/snaps/auth.png)
 </div>
@@ -115,14 +115,18 @@ Django permet la conception de belles URL et ne place aucune extension dans cell
 
 Les notations < int:pk> permettent de router notre application et faire correspondre un zero ou un autre nombre entier positif.
 
-<div style="width: 50%">
+<div style="width: 100%">
+
 ![URLS](assets/snaps/URLS.png)
+
 </div>
 
 TEMPLATES
 
-<div style="width: 50%">
+<div style="width: 100%">
+
 ![URLS](assets/snaps/template.jpg)
+
 </div>
 Les variables sont entourées par deux accolades.  **{{****   ****article.title****   ****}}**  veut dire « Afficher la valeur de l&#39;attribut titre de l&#39;article ». Mais les points ne sont pas utilisés uniquement pour l&#39;utilisation des attributs. Ils peuvent aussi être utilisés pour la recherche des clés de dictionnaires, d&#39;index, ou pour appeler des fonctions.
 
