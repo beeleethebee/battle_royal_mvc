@@ -1,7 +1,10 @@
-
 {% extends 'base.html' %}
 {% block head_title %}{{ post.title }}{% endblock %}
 {% block content %}
+<h1>{{article.title}}</h1>
+<div class="container">
+    {{article.content}}
+</div>
 <div class="container">
     {% if comments %}
     <div class="row mt-6">
@@ -13,6 +16,10 @@
         <div class="col-lg-6 ">
                         <p class="m-1 mt-3">{{ comment.content }}</p>
                         <p class="text-right"><small>{{ comment.created_at }}</small></p>
+                        {% if request.user == comment.author %}
+                        <a href="{% url 'comment_delete' article.pk comment.pk %}" style="color: darkred;">delete comment</a>
+                        {% endif %}
+                        </p>
         </div>
         {% endfor %}
     </div>
