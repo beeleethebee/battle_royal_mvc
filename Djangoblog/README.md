@@ -108,7 +108,7 @@ Django permet la conception de belles URL et ne place aucune extension dans cell
 
 Les notations \&lt;int :pk\&gt; permettent de router notre application et faire correspondre un zero ou un autre nombre entier positif.
 
-![URLS](assets/snaps/URLS.jpg)
+![URLS](assets/snaps/URLS.png)
 
 TEMPLATES
 
