@@ -1,8 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
 <h1>Articles</h1>
 <ul>
     {% for articles in object_list %}
-    <li>{{ articles.title }} --- {{ articles.created_at|date }}</li>
+        <li><a href="{% url 'article_detail' articles.pk %}" >{{ articles.title }} --- {{ articles.created_at|date }}</a>
+        {% if request.user == articles.author %}
+        <p class="text-right"> <a href="{% url 'article_update' articles.pk %}" style="color: green;">update article</a> -- <a href="{% url 'article_delete' articles.pk %}" style="color: darkred;">delete article</a></p>
+        </li>
+        {% endif %}
+        <div class="mb-4">
+            <!-- Dotted divider -->
+            <hr class="dotted">
+        </div>
     {% empty %}
     <li>No articles yet.</li>
     {% endfor %}
 </ul>
+{% endblock content %}

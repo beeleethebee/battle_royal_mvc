@@ -98,14 +98,21 @@ $ python manage.py migrate
 
 VUES
 
-Notre vue récupère des données d&#39;après les paramètres, charge un template et affiche le template avec les données récupérées.
-
+Django propose des vues génériques développées de façon à ce qu’on puisse rapidement les écrire sans devoir trop de code.
 Les classes suivantes dont je me suis servi pour le projet fournissent une base pour l&#39;édition de contenu, le traitement des formulaires :
 
 - [**django.views.generic.edit.FormView**](https://docs.djangoproject.com/fr/4.0/ref/class-based-views/generic-editing/#django.views.generic.edit.FormView)
 - [**django.views.generic.edit.CreateView**](https://docs.djangoproject.com/fr/4.0/ref/class-based-views/generic-editing/#django.views.generic.edit.CreateView)
 - [**django.views.generic.edit.UpdateView**](https://docs.djangoproject.com/fr/4.0/ref/class-based-views/generic-editing/#django.views.generic.edit.UpdateView)
 - [**django.views.generic.edit.DeleteView**](https://docs.djangoproject.com/fr/4.0/ref/class-based-views/generic-editing/#django.views.generic.edit.DeleteView)
+
+Les vues génériques permettent par example de créer, mettre à jour et supprimer des objets, avec ou sans gestion des autorisations (LoginRequiredMixin).
+
+Notre vue récupère des données d&#39;après les paramètres, charge un template et affiche le template avec les données récupérées.
+Outre ce que la vue générique fournit. Je crée donc ma propre implémentation de la méthode "get_context_data" pour completer l'informations de l'objet chargé dans le template :
+
+![views](assets/snaps/views.jpg)
+
 
 La doc indique clairement que chaque vue est responsable soit de retourner un objet [**HttpResponse**](https://docs.djangoproject.com/fr/4.0/ref/request-response/#django.http.HttpResponse) contenant le contenu de la page demandée, ou soit lever une exception, comme par exemple [**Http404**](https://docs.djangoproject.com/fr/4.0/topics/http/views/#django.http.Http404).
 
@@ -148,5 +155,5 @@ Ce projet a été plutôt simple et amusant, dans la mesure où la majeure parti
 
 #### Points Négatifs
 
-- Django fourni des interfaces d&#39;administration, qui ne sont pas forcément utiles pour la petits projets
+- Django fourni des interfaces d&#39;administration, qui ne sont pas forcément utiles pour les petits projets
 - La communauté Django est moins importante par rappot à celle d'autres technos.

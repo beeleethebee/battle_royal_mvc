@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block head_title %}{% if update %}Update post{% else %}Create a post{% endif %}{% endblock head_title %}
+{% block head_title %}{% if update %}Update an article{% else %}Create an article{% endif %}{% endblock head_title %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
-            <h2 class=" my-5">{% if update %}Update post{% else %}Create a post{% endif %}</h2>
+            <h2 class=" my-5">{% if update %}Update an article{% else %}Create an article{% endif %}</h2>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     {{ form.content.label_tag }}
                     <textarea type="text" class="form-control {% if form.content.errors %}is-invalid{% endif %}" id="id_content"
-                              name="content" cols="40" rows="10">{{ form.content.value|default:"" }}</textarea>
+                              name="content" cols="100" rows="60">{{ form.content.value|default:"" }}</textarea>
                     {% if form.content.errors %}
                     <div class="invalid-feedback">{{ form.content.errors }}</div>
                     {% endif %}
@@ -38,7 +38,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">
-                    {% if update %}Update the post{% else %}Create a post{% endif %}
+                    {% if update %}Update the post{% else %}Create an article{% endif %}
                 </button>
             </form>
 

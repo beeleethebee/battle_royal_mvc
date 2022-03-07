@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block head_title %}{{ post.title }}{% endblock %}
+{% block content-header %}
+    <h1>{{article.title}}</h1>
+    <div class="container">
+        {{article.content}}
+    </div>
+{% endblock content-header %}
 {% block content %}
-<h1>{{article.title}}</h1>
-<div class="container">
-    {{article.content}}
-</div>
 <div class="container">
     {% if comments %}
     <div class="row mt-6">
@@ -13,30 +15,39 @@
             <span class="">{{ comments.count }}</span>
         </div>
         {% for comment in comments %}
-        <div class="col-lg-6 ">
+        <div class="col-lg-12 ">
                         <p class="m-1 mt-3">{{ comment.content }}</p>
-                        <p class="text-right"><small>{{ comment.created_at }}</small></p>
-                        {% if request.user == comment.author %}
-                        <a href="{% url 'comment_delete' article.pk comment.pk %}" style="color: darkred;">delete comment</a>
-                        {% endif %}
+                        <p class="text-right">
+                            <small>{{ comment.created_at }}</small>
+                            {% if request.user == comment.author %}
+                            <span> -- <a href="{% url 'comment_delete' article.pk comment.pk %}" style="color: darkred;">delete comment</a></span>
+                            {% endif %}
                         </p>
+
+                        </p>
+                        <div class="mb-4">
+                            <!-- Dotted divider -->
+                            <hr class="dotted">
+                        </div>
         </div>
         {% endfor %}
     </div>
     {% endif %}
-
+    {% endblock content %}
+    {% block content-footer %}
+    <p><h3>Commenter</h3></p>
     <div class="row mt-6">
-            <h3>Commenter</h3>
             <form method='POST'>
                 {% csrf_token %}
                 <div class="form-group">
-                    <span class="ml-2"></span>{{ form.content.label_tag }}
+                    <span class="ml-2"></span>
                     <textarea class="{% if form.content.errors %}is-invalid{% endif %}" id=""
-                              name="content" rows="5">{{ form.content.value|default:'' }}</textarea>
+                              name="content"  cols="100" rows="10">{{ form.content.value|default:'' }}</textarea>
                 </div>
                 <button class="btn btn-primary ml-2" type="submit">Commenter</button>
             </form>
     </div>
+    {% endblock content-footer %}
+
 
 </div>
-{% endblock content %}

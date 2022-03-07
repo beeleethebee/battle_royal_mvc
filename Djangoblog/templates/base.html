@@ -3,11 +3,85 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Django Blog{% endblock %}</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        html,body{
+            background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: 'Numans', sans-serif;
+        }
+        .card{
+            min-height: 30%;
+            margin-top: 10%;
+            margin-bottom: auto;
+            min-width: 80%;
+            background-color: rgba(255,255,255,0.7) !important;
+        }
+
+    </style>
 </head>
 <body>
 <main>
-    {% block content %}
-    {% endblock %}
+    <nav class="navbar navbar-expand-sm   navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/djangoblog/articles_list">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/djangoblog/edit">Edit</a>
+                </li>
+                <li class="nav-item dropdown dmenu">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Archive
+                    </a>
+                    <div class="dropdown-menu sm-menu">
+                        <a class="dropdown-item" href="#">service2</a>
+                        <a class="dropdown-item" href="#">service 2</a>
+                        <a class="dropdown-item" href="#">service 3</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="social-part">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+                {% if user.is_authenticated %}
+                <p class="mr-5"><a href="{% url 'logout' %}">Log Out</a></p>
+                {% else %}
+                <a href="{% url 'login' %}">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    {% block content-header %}
+                    {% endblock %}
+                </div>
+                <div class="card-body">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                <div class="card-footer">
+                    {% block content-footer %}
+                    {% endblock content-footer %}
+                </div>
+            </div>
+        </div>
+  </div>
 </main>
 </body>
 </html>
