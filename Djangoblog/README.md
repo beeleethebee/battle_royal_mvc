@@ -62,7 +62,7 @@ Je crée un premier utilisateur avec rôle admin, L&#39;outil en ligne de comman
 ```sh
 $ python3 manage.py createsuperuser --username=admin --email=admin@admin.com
 ```
-<div style="width: 100%">
+<div style="width: 100%; heigth:80px;">
 
 ![auth](assets/snaps/auth.png)
 </div>
