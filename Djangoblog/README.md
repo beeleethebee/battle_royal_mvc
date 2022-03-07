@@ -60,7 +60,7 @@ $ source br-mvc-venv/bin/activate
 
 Je crée un premier utilisateur avec rôle admin, L&#39;outil en ligne de commande nous demandera de choisir un mot de passe
 ```sh
-$ python3 manage.py createsuperuser --username=admin [--email=admin@admin.com](mailto:--email%3Dsherif@admin.com)
+$ python3 manage.py createsuperuser --username=admin --email=admin@admin.com
 ```
 <div style="width: 100%">
 
