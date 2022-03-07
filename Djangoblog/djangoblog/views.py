@@ -82,7 +82,7 @@ class ArticleDetailView(DetailView):
     template_name = "djangoblog/article_detail.html"
 
     def get_context_data(self, **kwargs):
-        article = Article.objects.filter(id=self.kwargs['pk'])[0]
+        article = get_object_or_404(Article, pk=self.kwargs["pk"])
         context = super().get_context_data(**kwargs)
         context['article'] = article
         context['form'] = CommentForm()
@@ -94,8 +94,7 @@ class ArticleDetailView(DetailView):
         article = get_object_or_404(Article, pk=self.kwargs["pk"])
         self.object = self.get_object()
         context = super().get_context_data(**kwargs)
-        context['articles'] = Article.objects.filter(id=self.kwargs['pk'])[0]
-        context['article'] = article.content
+        context['article'] = Article.objects.filter(id=self.kwargs['pk'])[0]
         context['comments'] = article.comment_set.all()
         context['form'] = commentForm
 
@@ -106,3 +105,11 @@ class ArticleDetailView(DetailView):
             context['form'] = CommentForm()
 
         return self.render_to_response(context=context)
+
+
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    context_object_name = "comment"
+    template_name = 'djangoblog/article_confirm_delete.html'
+    def get_success_url(self):
+            return reverse_lazy('article_detail', kwargs={'pk': self.kwargs['article_pk']})

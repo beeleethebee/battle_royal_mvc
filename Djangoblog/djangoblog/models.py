@@ -15,7 +15,7 @@ class Article(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.title} :<br> {self.content}"
+        return 'article by {}'.format(self.author)
 
 class Comment(models.Model):
     content = models.TextField()
@@ -27,4 +27,4 @@ class Comment(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return 'Comment by {}'.format(self.content)
+        return 'comment by {}'.format(self.author)
