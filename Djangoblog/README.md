@@ -135,9 +135,14 @@ TEMPLATES
 ![URLS](assets/snaps/template.jpg)
 
 </div>
-Les variables sont entourées par deux accolades.  **{{****   ****article.title****   ****}}**  veut dire « Afficher la valeur de l&#39;attribut titre de l&#39;article ». Mais les points ne sont pas utilisés uniquement pour l&#39;utilisation des attributs. Ils peuvent aussi être utilisés pour la recherche des clés de dictionnaires, d&#39;index, ou pour appeler des fonctions.
+Les variables sont entourées par deux accolades.  
+La notation {{ article.title }}  permet d'afficher la valeur de l&#39;attribut titre de l&#39;article.Mais les points peuvent aussi être utilisés pour appeler des fonctions par example.
 
-Enfin, Django utilise le concept d&quot;« héritage de gabarits ». C&#39;est ce que fait  **{%****   ****extends****   ****&quot;base.html&quot;****   ****%}**. Cela veut dire « Charge premièrement le gabarit nommé &quot;base&quot;, qui a défini certains blocs, et remplit ces blocs avec le contenu qui suit. ». Pour résumer, cela permet de diminuer significativement la redondance dans les gabarits : chaque gabarit ne doit définir que ce qui lui est propre.
+Autres opérations que l'on doit souvent réaliser dans un template : l'évaluation de conditions. Une structure conditionnelle simple est proposée par le langage de template de Django (if).
+
+Concernant les variable de type liste, le moteur de template de Django fournit à ce propos une boucle for comme celle de Python.
+
+Enfin, la redondance dans les gabarits Django est diminuée grace à  l&quot;« héritage de gabarits ». Example:{% extends &quot;base.html&quot; %}. Cela veut dire « Charge premièrement le gabarit nommé &quot;base&quot;, et remplit ces blocs avec le contenu qui suit. ». ! 
 
 #
 
