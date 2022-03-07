@@ -62,8 +62,10 @@ Je crée un premier utilisateur avec rôle admin, L&#39;outil en ligne de comman
 ```sh
 $ python3 manage.py createsuperuser --username=admin [--email=admin@admin.com](mailto:--email%3Dsherif@admin.com)
 ```
-![auth](assets/snaps/auth.png)
+<div style="width: 50%">
 
+![auth](assets/snaps/auth.png)
+</div>
 
 ## 4 Modèle de données, mapping, pérsistence
 
@@ -75,7 +77,10 @@ Django permet de décrire la structure de notre base de données avec du code Py
 
 La [syntaxe de modélisation des données](https://docs.djangoproject.com/fr/4.0/topics/db/models/) offre un moyen pratique de représenter nos modèles.
 
+<div style="width: 50%">
+
 ![model](assets/snaps/models.png)
+</div>
 
 ## Déployer le modèle
 
@@ -110,12 +115,15 @@ Django permet la conception de belles URL et ne place aucune extension dans cell
 
 Les notations < int:pk> permettent de router notre application et faire correspondre un zero ou un autre nombre entier positif.
 
+<div style="width: 50%">
 ![URLS](assets/snaps/URLS.png)
+</div>
 
 TEMPLATES
 
+<div style="width: 50%">
 ![URLS](assets/snaps/template.jpg)
-
+</div>
 Les variables sont entourées par deux accolades.  **{{****   ****article.title****   ****}}**  veut dire « Afficher la valeur de l&#39;attribut titre de l&#39;article ». Mais les points ne sont pas utilisés uniquement pour l&#39;utilisation des attributs. Ils peuvent aussi être utilisés pour la recherche des clés de dictionnaires, d&#39;index, ou pour appeler des fonctions.
 
 Enfin, Django utilise le concept d&quot;« héritage de gabarits ». C&#39;est ce que fait  **{%****   ****extends****   ****&quot;base.html&quot;****   ****%}**. Cela veut dire « Charge premièrement le gabarit nommé &quot;base&quot;, qui a défini certains blocs, et remplit ces blocs avec le contenu qui suit. ». Pour résumer, cela permet de diminuer significativement la redondance dans les gabarits : chaque gabarit ne doit définir que ce qui lui est propre.
