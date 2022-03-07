@@ -138,7 +138,7 @@ Enfin, Django utilise le concept d&quot;« héritage de gabarits ». C&#39;est c
 
 Ce projet a été plutôt simple et amusant, dans la mesure où la majeure partie des notions que je connaissais grâce à d&#39;autres frameworks étaient toujours d&#39;actualité. J&#39;ai pu donc le prendre en main assez rapidement.
 
-### Je note ce framework à 14/20
+### Je note ce framework à 15/20
 
 #### Points positifs
 
