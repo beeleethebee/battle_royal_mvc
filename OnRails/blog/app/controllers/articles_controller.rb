@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
-    @user = User.find(@article.users_id)
+    @user = User.find(@article.user_id)
   end
 
   def new
@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    
+
 
     if @article.save
       redirect_to @article
@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
       render :edit, :unprocessable_entity
     end
   end
-  
+
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
@@ -44,7 +44,7 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      users_id = { users_id: Current.user.id }
-      params.require(:article).permit(:title, :body, :category_id, :users_id).reverse_merge(users_id)
+      user_id = { users_id: Current.user.id }
+      params.require(:article).permit(:title, :body, :category_id, :user_id).reverse_merge(user_id)
     end
 end
