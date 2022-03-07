@@ -51,7 +51,9 @@ $ python3 -m venv br-mvc-venv
 
 Activer l&#39;environnement virtuel.
 
+```sh
 $ source br-mvc-venv/bin/activate
+```
 
 
 ## 3 AUTH
@@ -106,7 +108,7 @@ URLS
 
 Django permet la conception de belles URL et ne place aucune extension dans celles-ci, comme  **.php**  ou  **.asp**.
 
-Les notations \&lt;int :pk\&gt; permettent de router notre application et faire correspondre un zero ou un autre nombre entier positif.
+Les notations < int:pk> permettent de router notre application et faire correspondre un zero ou un autre nombre entier positif.
 
 ![URLS](assets/snaps/URLS.png)
 
