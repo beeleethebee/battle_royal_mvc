@@ -31,10 +31,11 @@ Ceci fait, je veux créer mon projet et les fichiers qui vont avec ; je le nomm�
 $ python3 -m django startproject Djangoblog
 
 ```
-
 La structure de base du projet est la suivante
 
 ![architecture](assets/snaps/pr_structure.jpg)
+
+## Les applications
 
 J'ai bien aimé le fait que Django divise le projet en applications interdépendantes ;
 Ce principe permet de les réutiliser dans d'autres projets. 
@@ -42,6 +43,7 @@ Dans fichier setting.py j'enregisgre donc le nom de mon app : djangoblog
 
 ![apps](assets/snaps/apps.jpg)
 
+## Bases de données
 Une base de donnée Sqlite est fournie par défaut à la création du projet.
 
 ![apps](assets/snaps/db.jpg)
@@ -78,7 +80,7 @@ $ python3 manage.py createsuperuser --username=admin --email=admin@admin.com
 
 
 
-# 2 Modèle de données, mapping, pérsistence
+# 2 Modèle de données et mapping
 
 [comment]: <> (Sur la base du diagramme qui suit, je crée le modèle de données pour mon application.)
 
