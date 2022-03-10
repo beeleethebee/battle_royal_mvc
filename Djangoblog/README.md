@@ -36,8 +36,18 @@ La structure de base du projet est la suivante
 
 ![architecture](assets/snaps/pr_structure.jpg)
 
+J'ai bien aimé le fait que Django divise le projet en applications interdépendantes ;
+Ce principe permet de les réutiliser dans d'autres projets. 
+Dans fichier setting.py j'enregisgre donc le nom de mon app : djangoblog
 
-# 2 Environnement virtuel et built-in serveur
+![apps](assets/snaps/apps.jpg)
+
+Une base de donnée Sqlite est fournie par défaut à la création du projet.
+
+![apps](assets/snaps/db.jpg)
+
+
+#  Environnement virtuel et built-in serveur
 
 L&#39;environnement virtuel a pour but de manager nos dépendances sans conflit, la création de ce dernier est fortement conseillée par la doc.
 
@@ -55,8 +65,7 @@ Activer l&#39;environnement virtuel.
 $ source br-mvc-venv/bin/activate
 ```
 
-
-## 3 AUTH
+# AUTH
 
 Je crée un premier utilisateur avec rôle admin, L&#39;outil en ligne de commande nous demandera de choisir un mot de passe
 ```sh
@@ -67,11 +76,13 @@ $ python3 manage.py createsuperuser --username=admin --email=admin@admin.com
 ![auth](assets/snaps/auth.png)
 </div>
 
-## 4 Modèle de données, mapping, pérsistence
 
-Sur la base du diagramme qui suit, je crée le modèle de données pour mon application.
 
-![UML](assets/snaps/UML.jpg)
+## 2 Modèle de données, mapping, pérsistence
+
+[//]: <> (Sur la base du diagramme qui suit, je crée le modèle de données pour mon application.)
+
+[//]: <> (![UML](assets/snaps/UML.jpg)
 
 Django permet de décrire la structure de notre base de données avec du code Python (fichier models.py). Il est livré avec un mapping objet-relationnel avec lequel nous pouvons créer nos tables automatiquement.
 
@@ -94,7 +105,7 @@ $ python manage.py migrate
 
 ```
 
-## 5 Vues, URLS et templates 
+## 3 Vues, routing et templates 
 
 VUES
 
