@@ -47,7 +47,7 @@ Une base de donnée Sqlite est fournie par défaut à la création du projet.
 ![apps](assets/snaps/db.jpg)
 
 
-#  Environnement virtuel et built-in serveur
+##  Environnement virtuel et built-in serveur
 
 L&#39;environnement virtuel a pour but de manager nos dépendances sans conflit, la création de ce dernier est fortement conseillée par la doc.
 
@@ -65,7 +65,7 @@ Activer l&#39;environnement virtuel.
 $ source br-mvc-venv/bin/activate
 ```
 
-# AUTH
+## AUTH
 
 Je crée un premier utilisateur avec rôle admin, L&#39;outil en ligne de commande nous demandera de choisir un mot de passe
 ```sh
@@ -78,7 +78,7 @@ $ python3 manage.py createsuperuser --username=admin --email=admin@admin.com
 
 
 
-## 2 Modèle de données, mapping, pérsistence
+# 2 Modèle de données, mapping, pérsistence
 
 [comment]: <> (Sur la base du diagramme qui suit, je crée le modèle de données pour mon application.)
 
@@ -105,7 +105,7 @@ $ python manage.py migrate
 
 ```
 
-## 3 Vues, routing et templates 
+# 3 Vues, routing et templates 
 
 VUES
 
@@ -155,9 +155,9 @@ Concernant les variable de type liste, le moteur de template de Django fournit �
 
 Enfin, la redondance dans les gabarits Django est diminuée grace à  l&quot;« héritage de gabarits ». Example:{% extends &quot;base.html&quot; %}. Cela veut dire « Charge premièrement le gabarit nommé &quot;base&quot;, et remplit ces blocs avec le contenu qui suit. ». ! 
 
-#
 
-## Ce fut suave : CONSCLUSION
+
+# Ce fut suave : CONSCLUSION
 
 Ce projet a été plutôt simple et amusant, dans la mesure où la majeure partie des notions que je connaissais grâce à d&#39;autres frameworks étaient toujours d&#39;actualité. J&#39;ai pu donc le prendre en main assez rapidement.
 
