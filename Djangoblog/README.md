@@ -80,9 +80,9 @@ $ python3 manage.py createsuperuser --username=admin --email=admin@admin.com
 
 ## 2 Modèle de données, mapping, pérsistence
 
-[//]: <> (Sur la base du diagramme qui suit, je crée le modèle de données pour mon application.)
+[comment]: <> (Sur la base du diagramme qui suit, je crée le modèle de données pour mon application.)
 
-[//]: <> (![UML](assets/snaps/UML.jpg))
+[comment]: <> (![UML](assets/snaps/UML.jpg))
 
 Django permet de décrire la structure de notre base de données avec du code Python (fichier models.py). Il est livré avec un mapping objet-relationnel avec lequel nous pouvons créer nos tables automatiquement.
 
